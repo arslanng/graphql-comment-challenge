@@ -1,0 +1,43 @@
+type Query {
+  posts: [Post!]
+  post(id: ID!): Post!
+}
+
+type Mutation {
+  createPost(data: CreatePostInput!): Post!
+  updatePost(id: ID!, data: UpdatePostInput!): Post!
+  deletePost(id: ID!): Post!
+  deleteAllPosts: DeleteAllOutput!
+}
+
+type Subscription {
+  postCreated(user_id: ID): Post! #postCreated parametre alacak şekilde düzenlendi.
+  postUpdated: Post!
+  postDeleted: Post!
+  postsCount: Int!
+}
+
+type Post {
+  _id: ID!
+  title: String!
+  description: String
+  short_description: String
+  cover: String
+  # user_id: ID!
+  comments: [Comment!]
+  user: User!
+}
+input CreatePostInput {
+  title: String!
+  description: String
+  short_description: String
+  cover: String
+  user: ID! # user_id yerine user yazıldı.
+}
+input UpdatePostInput {
+  title: String
+  description: String
+  short_description: String
+  cover: String
+  user: ID
+}

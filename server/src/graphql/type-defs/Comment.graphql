@@ -1,0 +1,34 @@
+type Comment {
+  _id: ID!
+  text: String!
+  post: Post!
+  user: User!
+}
+input CreateCommetInput {
+  text: String!
+  post: ID!
+  user: ID!
+}
+input UpdateCommentInput {
+  text: String
+  post: ID
+  user: ID
+}
+
+type Query {
+  comments: [Comment]
+  comment(id: ID!): Comment!
+}
+
+type Mutation {
+  createComment(data: CreateCommetInput!): Comment!
+  updateComment(id: ID!, data: UpdateCommentInput!): Comment!
+  deleteComment(id: ID!): Comment!
+  deleteAllComments: DeleteAllOutput!
+}
+
+type Subscription {
+  commentCreated(post_id: ID): Comment!
+  commentUpdated: Comment!
+  commentDeleted: Comment!
+}
